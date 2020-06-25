@@ -1,0 +1,13 @@
+{
+  "name": "simple-invoice",
+  "version": "2.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "concurrently --kill-others \"npm run start --prefix server\" \"npm run start --prefix client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
+}
