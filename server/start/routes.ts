@@ -21,3 +21,7 @@
 import Route from '@ioc:Adonis/Core/Route';
 
 Route.on('/').render('welcome');
+
+Route.get('/test.pdf', async () => {
+  return 'This is a pdf';
+});
