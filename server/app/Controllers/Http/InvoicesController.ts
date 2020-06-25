@@ -2,6 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import PDFDocument from 'pdfkit';
 import PDFMake from 'pdfmake';
 import puppeteer from 'puppeteer';
+import htmlPDF from 'html-pdf';
 import fs from 'fs';
 import { TFontDictionary } from 'pdfmake/interfaces';
 
@@ -47,10 +48,31 @@ export default class InvoicesController {
     const page = await browser.newPage();
     page.setContent(html);
 
-    const pdf = await page.pdf({ format: 'A4' });
+    const pdf = await page.pdf();
 
     response.header('content-type', 'application.pdf');
     response.send(pdf);
+  }
+
+  public async htmlPDF({ view, response }: HttpContextContract) {
+    const html = view.render('pdf');
+
+    response.header('content-type', 'application.pdf');
+
+    const generatePDF = async () => {
+      return new Promise(resolve => {
+        htmlPDF.create(html).toStream((error, stream) => {
+          if (error) {
+            console.log(error);
+          }
+
+          response.stream(stream);
+          resolve();
+        });
+      });
+    };
+
+    await generatePDF();
   }
 }
 
