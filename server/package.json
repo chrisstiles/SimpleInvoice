@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@adonisjs/assembler": "^2.1.3",
+    "adonis-preset-ts": "^1.0.4",
     "pino-pretty": "^4.0.0",
     "typescript": "^3.9.5",
     "youch": "^2.0.10",
