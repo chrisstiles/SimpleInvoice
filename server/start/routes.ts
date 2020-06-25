@@ -24,3 +24,4 @@ Route.on('/').render('welcome');
 
 Route.get('/pdfkit.pdf', 'InvoicesController.pdfkit');
 Route.get('/pdfmake.pdf', 'InvoicesController.pdfmake');
+Route.get('/puppeteer.pdf', 'InvoicesController.puppeteer');
