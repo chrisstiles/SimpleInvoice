@@ -22,4 +22,5 @@ import Route from '@ioc:Adonis/Core/Route';
 
 Route.on('/').render('welcome');
 
-Route.get('/test.pdf', 'InvoicesController.test');
+Route.get('/pdfkit.pdf', 'InvoicesController.pdfkit');
+Route.get('/pdfmake.pdf', 'InvoicesController.pdfmake');
