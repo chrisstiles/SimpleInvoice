@@ -4,13 +4,9 @@ import fs from 'fs';
 
 export default class InvoicesController {
   public async test({ response }: HttpContextContract) {
-    // response.implicitEnd = false;
-
     const doc = new PDFDocument();
-    // const stream = fs.createWriteStream('invoice.pdf');
 
     doc.pipe(fs.createWriteStream('invoice.pdf'));
-    // doc.pipe(response);
 
     doc
       .fontSize(25)
@@ -18,10 +14,10 @@ export default class InvoicesController {
 
     doc.end();
 
-    response.header('Content-type', 'application/pdf');
+    response.response.writeHead(200, {
+      'Content-Type': 'application/pdf'
+    });
+
     doc.pipe(response.response);
-    return response.send(doc);
-    // return pdf;
-    // return await response.download(pdf);
   }
 }
