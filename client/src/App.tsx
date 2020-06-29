@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.css';
+import Designer from './Designer';
+import './styles/general.scss';
 
 function App() {
-  return <h1>Hello</h1>;
+  return <Designer />;
 }
 
 export default App;
