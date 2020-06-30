@@ -24,7 +24,23 @@
     "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "react/jsx-first-prop-new-line": [
+        1,
+        "multiline"
+      ],
+      "react/jsx-max-props-per-line": [
+        1,
+        {
+          "maximum": 1
+        }
+      ]
+    }
   },
   "config-overrides-path": "./config.js",
   "browserslist": {
@@ -40,6 +56,9 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "2.0.5",
+    "prettier-eslint": "^11.0.0",
     "react-app-rewire-alias": "^0.1.6",
     "react-app-rewired": "^2.1.6"
   }

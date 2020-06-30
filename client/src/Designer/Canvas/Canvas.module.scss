@@ -6,30 +6,23 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  padding-left: 300px;
 }
 
 .content {
-  // padding: 100px;
   width: 100%;
-  overflow: scroll;
-  padding: 70px 0;
+  overflow: auto;
+  padding: 110px 0 70px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .pageWrapper {
   padding: 0 70px;
-  // box-sizing: content-box;
-  // width: 8.5in;
-  // width: auto;
   display: inline-block;
   position: relative;
   margin: 0 auto;
-  // width: calc(8.5in + 200px);
-  // left: 50%;
-  // transform: translateX(-50%);
 }
 
 .page {
