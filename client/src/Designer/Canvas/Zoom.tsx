@@ -1,13 +1,24 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  // useState,
+  useCallback,
+  useEffect,
+  useRef
+} from 'react';
 import { clamp } from 'lodash';
+import { useSpring, animated } from 'react-spring';
+// import { useWheel } from 'react-use-gesture';
 
 export default React.memo(function Zoom({
   style,
   wrapper,
   ...restProps
 }: ZoomProps) {
-  // const ref = useRef<HTMLDivElement>(null);
-  const [zoom, setZoom] = useState(1);
+  const [{ x, y, scale }, set] = useSpring(() => ({
+    x: 0,
+    y: 0,
+    scale: 1
+  }));
+  const prevScale = useRef<number>(1);
   const handleWheel = useCallback(
     e => {
       e.preventDefault();
@@ -15,12 +26,11 @@ export default React.memo(function Zoom({
       const min = 0.3;
       const max = 5;
       const change = -(e.deltaY * factor);
-
-      setZoom(currentZoom => {
-        return clamp(currentZoom + change, min, max);
-      });
+      const nextScale = clamp(prevScale.current + change, min, max);
+      set({ scale: nextScale });
+      prevScale.current = nextScale;
     },
-    [setZoom]
+    [set]
   );
 
   useEffect(() => {
@@ -30,8 +40,9 @@ export default React.memo(function Zoom({
   }, [handleWheel, wrapper]);
 
   return (
-    <div
-      style={{ ...style, transform: `scale(${zoom})` }}
+    <animated.div
+      // {...bind()}
+      style={{ ...style, scale }}
       {...restProps}
     />
   );
