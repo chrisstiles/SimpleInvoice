@@ -21,6 +21,10 @@ export default React.memo(function Zoom({
   const prevScale = useRef<number>(1);
   const handleWheel = useCallback(
     e => {
+      if (!e.metaKey && !e.ctrlKey) {
+        return;
+      }
+
       e.preventDefault();
       const factor = 0.008;
       const min = 0.3;
