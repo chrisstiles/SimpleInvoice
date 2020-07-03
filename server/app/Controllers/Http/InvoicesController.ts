@@ -42,6 +42,12 @@ export default class InvoicesController {
     doc.pipe(response.response);
   }
 
+  public async generate({ request, response }: HttpContextContract) {
+    console.log(request.post());
+
+    response.send('Hello');
+  }
+
   public async puppeteer({ view, response }: HttpContextContract) {
     const html = view.render('pdf');
     const browser = await puppeteer.launch({ headless: true });

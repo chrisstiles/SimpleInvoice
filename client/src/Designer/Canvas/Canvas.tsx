@@ -1,28 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import Zoom from './Zoom';
 import styles from './Canvas.module.scss';
 
-export default function Canvas() {
-  const wrapper = useRef<HTMLDivElement>(null!);
-
-  useEffect(() => {
-    const el = wrapper.current;
-    const handler = (e: WheelEvent) => {
-      // e.preventDefault();
-      // console.log(e);
-      // e.stopImmediatePropagation();
-    };
-
-    el.addEventListener('wheel', handler, {
-      capture: true
-      // passive: true
-    });
-
-    return () => el.removeEventListener('wheel', handler);
-  }, []);
+export default React.memo(function Canvas() {
+  const wrapper = useRef<HTMLDivElement>(null);
 
   return (
     <div ref={wrapper} className={styles.wrapper}>
-      <div className={styles.content}>
+      <Zoom wrapper={wrapper} className={styles.content}>
         <div className={styles.pageWrapper}>
           <div className={styles.page}>
             This is my template
@@ -79,7 +64,7 @@ export default function Canvas() {
             <br />
           </div>
         </div>
-      </div>
+      </Zoom>
     </div>
   );
-}
+});
