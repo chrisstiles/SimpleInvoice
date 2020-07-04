@@ -4,14 +4,14 @@
 .wrapper {
   flex-grow: 1;
   width: 100%;
-  // overflow: hidden;
-  overflow: auto;
+  // overflow-y: auto;
+  // overflow-x: hidden;
+  overflow: hidden;
   position: relative;
 }
 
 .content {
   width: 100%;
-  // overflow: auto;
   padding: 110px 0 70px 0;
   display: flex;
   flex-direction: column;
@@ -24,18 +24,4 @@
   display: inline-block;
   position: relative;
   margin: 0 auto;
-}
-
-.page {
-  width: 8.5in;
-  height: 11in;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 0.5in;
-  flex-grow: 0;
-  flex-shrink: 0;
-  box-shadow: 0px 27px 35px rgba(0, 0, 0, 0.01),
-    0px 11px 20px rgba(0, 0, 0, 0.02),
-    0px 2px 11px rgba(0, 0, 0, 0.01);
-  position: relative;
 }

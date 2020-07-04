@@ -1,0 +1,14 @@
+/* --------------------------- */
+/* Page */
+
+.page {
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 0.5in;
+  flex-grow: 0;
+  flex-shrink: 0;
+  box-shadow: 0px 27px 35px rgba(0, 0, 0, 0.01),
+    0px 11px 20px rgba(0, 0, 0, 0.02),
+    0px 2px 11px rgba(0, 0, 0, 0.01);
+  position: relative;
+}

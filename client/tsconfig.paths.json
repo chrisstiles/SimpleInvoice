@@ -2,7 +2,8 @@
   "compilerOptions": {
     "paths": {
       "@utils/*": ["src/utils/*"],
-      "@helpers": ["src/utils/helpers"]
+      "@helpers": ["src/utils/helpers"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "baseUrl": "."
   }
