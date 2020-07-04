@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import Zoom from './Zoom';
+import Zoomable from './Zoomable';
 import Page from './Page';
 import styles from './Canvas.module.scss';
 import PaperSize from '../PaperSize';
@@ -10,15 +10,15 @@ export default React.memo(function Canvas() {
   return (
     <div ref={wrapper} className={styles.wrapper}>
       <div className={styles.content}>
-        <Zoom
+        <Zoomable
           paperSize={PaperSize.Letter}
           wrapper={wrapper}
           className={styles.pageWrapper}
         >
           <Page paperSize={PaperSize.Letter}>
-            This is some content
+            <div>This is some content</div>
           </Page>
-        </Zoom>
+        </Zoomable>
       </div>
     </div>
   );

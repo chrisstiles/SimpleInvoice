@@ -9,12 +9,12 @@ import useWindowSize from '@hooks/useWindowSize';
 import { clamp } from 'lodash';
 import { useSpring, animated } from 'react-spring';
 
-export default React.memo(function Zoom({
+export default React.memo(function Zoomable({
   style,
   wrapper,
   paperSize,
   ...restProps
-}: ZoomProps) {
+}: ZoomableProps) {
   const {
     width: windowWidth,
     height: windowHeight
@@ -122,7 +122,7 @@ export default React.memo(function Zoom({
   );
 });
 
-type ZoomProps = React.HTMLAttributes<HTMLDivElement> & {
+type ZoomableProps = React.HTMLAttributes<HTMLDivElement> & {
   wrapper: React.RefObject<HTMLDivElement>;
   paperSize: PaperSize;
 };
