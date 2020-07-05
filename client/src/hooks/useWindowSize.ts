@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 
-interface WindowSize {
+type WindowSize = {
   width: number;
   height: number;
-}
+};
 
 export default function useWindowSize(
   callback?: (size: WindowSize) => void

@@ -6,8 +6,16 @@ import React, {
 } from 'react';
 import PaperSize from '../PaperSize';
 import useWindowSize from '@hooks/useWindowSize';
+import useKeyboard from '@hooks/useKeyboard';
+import useIsMounted from '@hooks/useIsMounted';
 import { clamp } from 'lodash';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, SpringConfig } from 'react-spring';
+import { assignExisting } from '@helpers';
+
+type ZoomableProps = React.HTMLAttributes<Element> & {
+  wrapper: React.RefObject<Element>;
+  paperSize: PaperSize;
+};
 
 export default React.memo(function Zoomable({
   style,
@@ -19,29 +27,33 @@ export default React.memo(function Zoomable({
     width: windowWidth,
     height: windowHeight
   } = useWindowSize();
+  const isMounted = useIsMounted();
 
-  const [{ scale }, setScale] = useSpring(() => ({
+  const [{ scale, x, y }, set] = useSpring(() => ({
     scale: 1,
-    config: {
-      tension: 165,
-      friction: 20,
-      mass: 0.8
-    }
-  }));
-
-  const [{ x, y }, setPosition] = useSpring(() => ({
     x: 0,
     y: 0,
-    config: {
-      tension: 150,
-      friction: 10,
-      mass: 0.1
+    config: key => {
+      if (key === 'scale') {
+        return config.scale;
+      }
+
+      return config.position;
     }
   }));
 
-  const currentScale = useRef<number>(1);
-  const currentX = useRef<number>(0);
-  const currentY = useRef<number>(0);
+  const state = useRef({ ...initialState });
+  const transform = useCallback(
+    newState => {
+      if (state.current.resetting) {
+        return;
+      }
+
+      set(newState);
+      assignExisting(state.current, newState);
+    },
+    [set]
+  );
 
   const bounds = useMemo(() => {
     const minVisibleAmount = 100;
@@ -65,14 +77,14 @@ export default React.memo(function Zoomable({
       const min = 0.3;
       const max = 5;
       const newScale = clamp(
-        currentScale.current + -(e.deltaY * factor),
+        state.current.scale + -(e.deltaY * factor),
         min,
         max
       );
-      setScale({ scale: newScale });
-      currentScale.current = newScale;
+
+      transform({ scale: newScale });
     },
-    [setScale]
+    [transform]
   );
 
   const handlePan = useCallback(
@@ -80,22 +92,20 @@ export default React.memo(function Zoomable({
       e.preventDefault();
       const factor = 1.5;
       const newX = clamp(
-        currentX.current - e.deltaX * factor,
+        state.current.x - e.deltaX * factor,
         -bounds.x,
         bounds.x
       );
 
       const newY = clamp(
-        currentY.current - e.deltaY * factor,
+        state.current.y - e.deltaY * factor,
         -bounds.y,
         bounds.y
       );
 
-      setPosition({ x: newX, y: newY });
-      currentX.current = newX;
-      currentY.current = newY;
+      transform({ x: newX, y: newY });
     },
-    [setPosition, bounds.x, bounds.y]
+    [transform, bounds.x, bounds.y]
   );
 
   const handleWheel = useCallback(
@@ -108,6 +118,22 @@ export default React.memo(function Zoomable({
     },
     [handleZoom, handlePan]
   );
+
+  const reset = useCallback(() => {
+    transform({
+      ...initialState,
+      easing: 'd3-ease',
+      onRest: () => {
+        setTimeout(() => {
+          if (isMounted.current) {
+            state.current.resetting = false;
+          }
+        }, 50);
+      }
+    });
+  }, [isMounted, transform]);
+
+  useKeyboard({ key: '0', metaKey: true }, reset);
 
   useEffect(() => {
     const el = wrapper.current;
@@ -122,7 +148,29 @@ export default React.memo(function Zoomable({
   );
 });
 
-type ZoomableProps = React.HTMLAttributes<HTMLDivElement> & {
-  wrapper: React.RefObject<HTMLDivElement>;
-  paperSize: PaperSize;
+const config: { [key: string]: SpringConfig } = {
+  scale: {
+    tension: 165,
+    friction: 20,
+    mass: 0.8
+  },
+  position: {
+    tension: 150,
+    friction: 10,
+    mass: 0.1
+  }
+};
+
+type ZoomState = {
+  scale: number;
+  x: number;
+  y: number;
+  resetting: boolean;
+};
+
+const initialState: ZoomState = {
+  scale: 1,
+  x: 0,
+  y: 0,
+  resetting: false
 };

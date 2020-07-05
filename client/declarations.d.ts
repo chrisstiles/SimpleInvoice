@@ -11,3 +11,5 @@ declare module '*.module.scss' {
 declare module '*.jpg';
 declare module '*.png';
 declare module '*.svg';
+
+declare type DomTarget = EventTarget | React.RefObject<EventTarget>;
