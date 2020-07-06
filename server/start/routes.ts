@@ -26,3 +26,6 @@ Route.get('pdf/pdfkit.pdf', 'InvoicesController.pdfkit');
 Route.get('pdf/pdfmake.pdf', 'InvoicesController.pdfmake');
 Route.post('pdf/generate', 'InvoicesController.generate');
 Route.get('pdf/puppeteer.pdf', 'InvoicesController.puppeteer');
+
+// Render static front-end
+Route.on('*').render('index');

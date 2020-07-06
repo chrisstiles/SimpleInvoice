@@ -1,9 +1,15 @@
 {
   "name": "simple-invoice",
   "version": "2.0.0",
-  "description": "",
+  "description": "Complete rebuild of simpleinvoice.io with Typescript and React",
+  "engines": {
+    "node": "12.13.x",
+    "npm": "6.12.x"
+  },
   "scripts": {
-    "dev": "concurrently --kill-others \"npm run start --prefix server\" \"npm run start --prefix client\""
+    "build": "sh ./build.sh",
+    "dev": "concurrently --kill-others \"npm run start --prefix server\" \"npm run start --prefix client\"",
+    "start": "node ./server/build/server.js"
   },
   "author": "",
   "license": "ISC",
