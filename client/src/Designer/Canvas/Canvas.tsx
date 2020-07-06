@@ -9,7 +9,10 @@ export default React.memo(function Canvas() {
   const wrapper = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={wrapper} className={styles.wrapper}>
+    <div
+      ref={wrapper}
+      className={styles.wrapper}
+    >
       <div className={styles.content}>
         <Zoomable
           paperSize={PaperSize.Letter}

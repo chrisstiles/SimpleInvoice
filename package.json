@@ -9,6 +9,8 @@
   "license": "ISC",
   "devDependencies": {
     "adonis-preset-ts": "^1.0.4",
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4"
   }
 }

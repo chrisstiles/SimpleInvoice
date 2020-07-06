@@ -23,7 +23,31 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "indent": [
+        1,
+        2
+      ],
+      "react/jsx-closing-bracket-location": [
+        1,
+        "line-aligned"
+      ],
+      "react/jsx-first-prop-new-line": [
+        1,
+        "multiline"
+      ],
+      "react/jsx-max-props-per-line": [
+        1,
+        {
+          "maximum": 1,
+          "when": "always"
+        }
+      ]
+    }
   },
   "babel": {
     "plugins": [
@@ -57,6 +81,7 @@
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "babel-plugin-lodash": "^3.3.4",
+    "eslint-plugin-prettier": "^3.1.4",
     "react-app-rewire-alias": "^0.1.6",
     "source-map-explorer": "^2.4.2"
   }

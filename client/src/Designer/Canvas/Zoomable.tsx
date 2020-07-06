@@ -144,7 +144,10 @@ export default React.memo(function Zoomable({
   }, [handleWheel, wrapper]);
 
   return (
-    <animated.div style={{ ...style, x, y, scale }} {...restProps} />
+    <animated.div
+      style={{ ...style, x, y, scale }}
+      {...restProps}
+    />
   );
 });
 
