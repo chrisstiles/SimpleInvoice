@@ -6,7 +6,7 @@ npm run build-prod
 
 cd ../client
 npm install
-npm npm run build
+npm run build
 
 cd ..
 cp -a ./client/build/. ./server/build/public/
