@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
-npm run build-prod --prefix server
-npm run build --prefix client
+cd server
+npm install
+npm run build-prod
+
+cd ../client
+npm install
+npm npm run build
+
+cd ..
 cp -a ./client/build/. ./server/build/public/
