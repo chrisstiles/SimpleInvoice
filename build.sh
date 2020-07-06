@@ -3,8 +3,9 @@
 cd server
 npm install
 npm run build-prod
+cd build npm ci --production
 
-cd ../client
+cd ../../client
 npm install
 npm run build
 
