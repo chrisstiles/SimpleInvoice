@@ -9,7 +9,7 @@
   "scripts": {
     "build": "sh ./build.sh",
     "dev": "concurrently --kill-others \"npm run start --prefix server\" \"npm run start --prefix client\"",
-    "start": "node ./server/build/server.js"
+    "start": "ENV_SILENT=true node ./server/build/server.js"
   },
   "author": "",
   "license": "ISC",
