@@ -13,7 +13,6 @@
     "react-scripts": "3.4.1",
     "react-spring": "^9.0.0-rc.3",
     "react-use-gesture": "^7.0.15",
-    "typescript": "^3.7.5",
     "@babel/cli": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@craco/craco": "^5.6.4",

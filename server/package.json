@@ -25,7 +25,6 @@
   },
   "devDependencies": {
     "pino-pretty": "^4.0.0",
-    "typescript": "^3.9.5",
     "youch": "^2.0.10",
     "youch-terminal": "^1.0.0"
   }
